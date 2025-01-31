@@ -8,13 +8,16 @@ const Button = ({ text, onClick }) => (
   <button onClick={onClick}>{text}</button>
 )
 
-const Display = ({state1, state2, state3 }) => (
+const Stat = ({state1, state2, state3 }) => {
+  return (
     <p>
       good {state1}<br/>
       neutral {state2}<br/>
       bad {state3}<br/>
+      all {state1 + state2 + state3}
     </p>
-)
+  )
+}
 
 const App = () => {
   // save clicks of each button to its own state
@@ -41,7 +44,7 @@ const App = () => {
       <Button text='neutral' onClick={handleNeutral} />
       <Button text='bad' onClick={handleBad} />
       <Heading text='statistics' />
-      <Display state1={good} state2={neutral} state3={bad} />
+      <Stat state1={good} state2={neutral} state3={bad} />
     </div>
   )
 }

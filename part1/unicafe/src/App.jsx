@@ -1,6 +1,12 @@
 import { useState } from 'react'
 
-const Heading = ({ text }) => <h2>{text}</h2>
+const Heading = ({ text }) => (
+  <h2>{text}</h2>
+)
+
+const Button = ({ text, onClick }) => (
+  <button>{text}</button>
+)
 
 const App = () => {
   // save clicks of each button to its own state
@@ -11,6 +17,9 @@ const App = () => {
   return (
     <div>
       <Heading text='give feedback' />
+      <Button text='good' />
+      <Button text='neutral' />
+      <Button text='bad' />
       <Heading text='statistics' />
     </div>
   )

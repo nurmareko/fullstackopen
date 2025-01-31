@@ -9,12 +9,16 @@ const Button = ({ text, onClick }) => (
 )
 
 const Stat = ({state1, state2, state3 }) => {
+  const total = state1 + state2 + state3
+  const average = (state1 - state3) / total
+
   return (
     <p>
       good {state1}<br/>
       neutral {state2}<br/>
       bad {state3}<br/>
-      all {state1 + state2 + state3}
+      all {total}<br/>
+      average {average}<br/>
     </p>
   )
 }

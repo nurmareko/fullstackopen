@@ -5,7 +5,7 @@ const Heading = ({ text }) => (
 )
 
 const Button = ({ text, onClick }) => (
-  <button>{text}</button>
+  <button onClick={onClick}>{text}</button>
 )
 
 const App = () => {
@@ -14,12 +14,24 @@ const App = () => {
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
 
+  const handleGood = () => {
+    setGood(good + 1)
+  }
+
+  const handleNeutral = () => {
+    setNeutral(neutral + 1)
+  }
+
+  const handleBad = () => {
+    setBad(bad + 1)
+  }
+
   return (
     <div>
       <Heading text='give feedback' />
-      <Button text='good' />
-      <Button text='neutral' />
-      <Button text='bad' />
+      <Button text='good' onClick={handleGood}/>
+      <Button text='neutral' onClick={handleNeutral}/>
+      <Button text='bad' onClick={handleBad}/>
       <Heading text='statistics' />
     </div>
   )

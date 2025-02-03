@@ -6,6 +6,15 @@ const Button = ({ text, onClick }) => {
   )
 }
 
+const getRandomInt = (min, max) => {
+  const minCeiled = Math.ceil(min)
+  const maxFloored = Math.floor(max)
+
+  return (
+    Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled)
+  )
+}
+
 const App = () => {
   const anecdotes = [
     'If it hurts, do it more often.',
@@ -17,23 +26,30 @@ const App = () => {
     'Programming without an extremely heavy use of console.log is same as if a doctor would refuse to use x-rays or blood tests when diagnosing patients.',
     'The only way to go fast, is to go well.'
   ]
+  const length = anecdotes.length
 
-  const [selected, setSelected] = useState(0)
+  const [selected, setSelected] = useState(getRandomInt(0, length))
+  const [votes, setVotes] = useState(Array(length).fill(0))
 
   const handleRandom = () => {
-    const max = anecdotes.length
-    
+    let random
+
+    do {
+      random = getRandomInt(0, length)
+    } while (random == selected)
+
+
     return (
-      setSelected(getRandomInt(0, max))
+      setSelected(random)
     )
   }
 
-  const getRandomInt = (min, max) => {
-    const minCeiled = Math.ceil(min)
-    const maxFloored = Math.floor(max)
+  const handleVote = () => {
+    const copy = [...votes]
+    copy[selected]++
 
     return (
-      Math.floor(Math.random() * (maxFloored - minCeiled) + minCeiled)
+      setVotes(copy)
     )
   }
 
@@ -41,7 +57,10 @@ const App = () => {
     <div>
       {anecdotes[selected]}
       <br/>
-      <Button text='next anecdote' onClick={handleRandom}/>
+      has {votes[selected]} votes
+      <br/>
+      <Button text='vote' onClick={handleVote} />
+      <Button text='next anecdote' onClick={handleRandom} />
     </div>
   )
 }

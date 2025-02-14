@@ -1,4 +1,4 @@
-const Header = (props) => <h1>{props.course}</h1>
+const Header = (props) => <h2>{props.course}</h2>
 
 const Content = ({ parts }) => {
   const render = (part) => {
@@ -16,7 +16,7 @@ const Content = ({ parts }) => {
 
 const Total = ({ parts }) => {
   const plus = (acc, rest) => acc + rest.exercises
-  
+
   return (
     <p>
       <strong>
@@ -26,9 +26,10 @@ const Total = ({ parts }) => {
   )
 }
 
-const Course = ({ course }) => {
+const Course = (course) => {
+
   return (
-    <div>
+    <div key={course.id}>
     <Header course={course.name} />
     <Content parts={course.parts} />
     <Total parts={course.parts} />

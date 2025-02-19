@@ -17,8 +17,15 @@ const App = () => {
     event.preventDefault()
     const trimedName = newName.trim()
 
+
     if (isNameExist(trimedName)) {
       alert(trimedName + " is already added to phonebook")
+    }
+    else if (!isAlpha(trimedName)) {
+      alert(trimedName + " is not a valid name")
+    }
+    else if (!isValidNumber(newNumber)) {
+      alert(newNumber + " is not a valid number")
     }
     else {
       const newPerson = {
@@ -30,13 +37,31 @@ const App = () => {
     }
   }
 
+  const isValidName = (name) => {
+    return (
+      isAlpha(name) && !isNameExist(name)
+    )
+  }
+
   const handleNameChange = () => {
     setNewName(event.target.value)
+  }
+
+  const isAlpha = (str) => {
+    return (
+      /^[A-Za-z\s]+$/.test(str)
+    )
   }
 
   const isNameExist = (name) => {
     return (
       persons.some(person => person.name === name)
+    )
+  }
+
+  const isValidNumber = (str) => {
+    return (
+      /^[0-9-]+$/.test(str)
     )
   }
 

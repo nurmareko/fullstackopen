@@ -1,5 +1,5 @@
 import { useState } from "react"
-import Persons from "./components/RenderPersons"
+import Persons from "./components/Persons"
 
 const App = () => {
   const [persons, setPersons] = useState([

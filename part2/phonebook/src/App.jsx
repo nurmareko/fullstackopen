@@ -8,14 +8,12 @@ const App = () => {
     { name: 'Dan Abramov', number: '12-43-234345', id: 3 },
     { name: 'Mary Poppendieck', number: '39-23-6423122', id: 4 }
   ])
-
-  const [newName, setNewName] = useState("")
-  const [newNumber, setNewNumber] = useState("")
+  const [newData, setNewData] = useState({ name: "", number: "" })
   const [nameFilter, setNameFilter] = useState("")
 
   const addPerson = () => {
     event.preventDefault()
-    const trimedName = newName.trim()
+    const trimedName = newData.name.trim()
 
 
     if (isNameExist(trimedName)) {
@@ -24,27 +22,17 @@ const App = () => {
     else if (!isAlpha(trimedName)) {
       alert(trimedName + " is not a valid name")
     }
-    else if (!isValidNumber(newNumber)) {
-      alert(newNumber + " is not a valid number")
+    else if (!isValidNumber(newData.number)) {
+      alert(newData.number + " is not a valid number")
     }
     else {
       const newPerson = {
         name: trimedName,
-        number: newNumber,
+        number: newData.number,
         id: persons.length + 1
       }
       setPersons(persons.concat(newPerson))
     }
-  }
-
-  const isValidName = (name) => {
-    return (
-      isAlpha(name) && !isNameExist(name)
-    )
-  }
-
-  const handleNameChange = () => {
-    setNewName(event.target.value)
   }
 
   const isAlpha = (str) => {
@@ -65,10 +53,13 @@ const App = () => {
     )
   }
 
-  const handleNumberChange = () => {
-    setNewNumber(event.target.value)
+  const handleNameChange = () => {
+    setNewData({ ...newData, name: event.target.value })
   }
 
+  const handleNumberChange = () => {
+    setNewData({ ...newData, number: event.target.value })
+  }
   const handleNameFilter = () => {
     setNameFilter(event.target.value)
   }
@@ -91,10 +82,10 @@ const App = () => {
       <h2>add a new</h2>
       <form onSubmit={addPerson}>
         <div>
-          name: <input value={newName} onChange={handleNameChange} />
+          name: <input value={newData.name} onChange={handleNameChange} />
         </div>
         <div>
-          number: <input value={newNumber} onChange={handleNumberChange} />
+          number: <input value={newData.number} onChange={handleNumberChange} />
         </div>
         <div>
           <button type="submit">add</button>

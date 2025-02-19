@@ -1,5 +1,5 @@
 import { useState } from "react"
-import RenderPersons from "./components/RenderPersons"
+import Persons from "./components/RenderPersons"
 
 const App = () => {
   const [persons, setPersons] = useState([
@@ -76,7 +76,7 @@ const App = () => {
         </div>
       </form>
       <h2>Numbers</h2>
-      <RenderPersons persons={personsToShow} />
+      <Persons persons={personsToShow} />
     </div>
   )
 }

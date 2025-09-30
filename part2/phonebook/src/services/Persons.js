@@ -17,7 +17,6 @@ const erase = (object) => {
 }
 
 const replace = (object) => {
-  console.log(object)
   const request = axios.put(`${baseUrl}/${object.id}`, object)
   return request.then(response => response.data)
 }

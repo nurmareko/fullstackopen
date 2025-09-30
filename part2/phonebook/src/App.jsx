@@ -1,16 +1,17 @@
 import { useState, useEffect } from "react"
+import Filter from "./components/Filter"
+import Notification from "./components/Notification"
 import personService from "./services/Persons"
 import Persons from "./components/Persons"
-import Filter from "./components/Filter"
 import PersonsForm from "./components/PersonsForm"
 
 const App = () => {
   const [persons, setPersons] = useState([])
   const [newData, setNewData] = useState({ name: "", number: "" })
   const [nameFilter, setNameFilter] = useState("")
+  const [notification, setNotification] = useState(null)
 
   useEffect(() => {
-
     personService
       .getAll()
       .then(initialPersons => setPersons(initialPersons))
@@ -30,11 +31,7 @@ const App = () => {
     else if (isNameExist(trimedName)) {
       const message = `${trimedName} is already added to phonebook, replace the old number with a new one?`
       if (confirm(message)) {
-        // console.log("lets replace with new number!")
-
         const initialData = persons.find(person => person.name === trimedName)
-        console.log(initialData)
-
         const updatedData = {
           ...initialData,
           number: newData.number
@@ -43,10 +40,13 @@ const App = () => {
         personService
           .replace(updatedData)
           .then(returnedPerson => setPersons(persons.map(person => person.id === returnedPerson.id ? returnedPerson : person)))
+          .catch(error => {
+            setNotification({ message: `information of ${trimedName} has already been removed from server`, type: 'error' })
+            setPersons(persons.filter(person => person.name !== trimedName))
+          })
+
+        setNotification({ message: `${updatedData.name} phone number is updated`, type: 'success' })
       }
-
-      // alert(trimedName + " is already added to phonebook")
-
     }
     else {
       const newPerson = {
@@ -57,7 +57,10 @@ const App = () => {
       personService
         .create(newPerson)
         .then(returnedPerson => setPersons(persons.concat(returnedPerson)))
+
+      setNotification({ message: `Added ${newPerson.name}`, type: 'success' })
     }
+    setTimeout(() => setNotification(null), 5000)
   }
 
   const isAlpha = (str) => {
@@ -100,8 +103,6 @@ const App = () => {
 
   const deletePerson = (person) => {
     if (confirm(`delete ${person.name}?`)) {
-      console.log(`the person with ${person.id} will be deleted!`)
-
       personService
         .erase(person)
         .then(returnedPerson => setPersons(persons.filter(person => person.id !== returnedPerson.id)))
@@ -113,6 +114,7 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification notificationState={notification} />
       <Filter value={nameFilter} onChange={handleNameFilter} />
       <h2>add a new</h2>
       <PersonsForm

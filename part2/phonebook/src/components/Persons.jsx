@@ -1,11 +1,8 @@
 const Persons = ({ persons, deletePerson }) => {
   return (
-
     persons.map(person =>
-      <>
-        <p key={person.id}>{person.name} {person.number}</p>
-        <button onClick={() => deletePerson(person)}>delete</button>
-      </>)
+      <p key={person.id}>{person.name} {person.number} <button onClick={() => deletePerson(person)}>delete</button></p>
+    )
   )
 }
 

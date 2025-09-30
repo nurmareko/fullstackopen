@@ -34,7 +34,6 @@ const App = () => {
       const newPerson = {
         name: trimedName,
         number: newData.number,
-        id: persons.length + 1
       }
 
       personService
@@ -81,6 +80,16 @@ const App = () => {
     )
   }
 
+  const deletePerson = (person) => {
+    if (confirm(`delete ${person.name}?`)) {
+      console.log(`the person with ${person.id} will be deleted!`)
+
+      personService
+        .erase(person)
+        .then(returnedPerson => setPersons(persons.filter(person => person.id !== returnedPerson.id)))
+    }
+  }
+
   const personsToShow = nameFilter === "" ? persons : persons.filter(isHaveName)
 
   return (
@@ -95,7 +104,10 @@ const App = () => {
         onChangeNumber={handleNumberChange}
       />
       <h2>Numbers</h2>
-      <Persons persons={personsToShow} />
+      <Persons
+        persons={personsToShow}
+        deletePerson={deletePerson}
+      />
     </div>
   )
 }

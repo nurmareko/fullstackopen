@@ -21,14 +21,32 @@ const App = () => {
     const trimedName = newData.name.trim()
 
 
-    if (isNameExist(trimedName)) {
-      alert(trimedName + " is already added to phonebook")
+    if (!isValidNumber(newData.number)) {
+      alert(newData.number + " is not a valid number")
     }
     else if (!isAlpha(trimedName)) {
       alert(trimedName + " is not a valid name")
     }
-    else if (!isValidNumber(newData.number)) {
-      alert(newData.number + " is not a valid number")
+    else if (isNameExist(trimedName)) {
+      const message = `${trimedName} is already added to phonebook, replace the old number with a new one?`
+      if (confirm(message)) {
+        // console.log("lets replace with new number!")
+
+        const initialData = persons.find(person => person.name === trimedName)
+        console.log(initialData)
+
+        const updatedData = {
+          ...initialData,
+          number: newData.number
+        }
+
+        personService
+          .replace(updatedData)
+          .then(returnedPerson => setPersons(persons.map(person => person.id === returnedPerson.id ? returnedPerson : person)))
+      }
+
+      // alert(trimedName + " is already added to phonebook")
+
     }
     else {
       const newPerson = {

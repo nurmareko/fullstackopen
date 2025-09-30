@@ -16,4 +16,10 @@ const erase = (object) => {
   return request.then(response => response.data)
 }
 
-export default { getAll, create, erase }
+const replace = (object) => {
+  console.log(object)
+  const request = axios.put(`${baseUrl}/${object.id}`, object)
+  return request.then(response => response.data)
+}
+
+export default { getAll, create, erase, replace }

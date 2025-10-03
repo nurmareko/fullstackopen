@@ -1,3 +1,0 @@
-What happened when you click the save button on the notes page using single-page version of the app?
-
-The javascript code will prevent the default handling of form's submit, instead it add the new note to the note list then rerender the note list, then the browser send POST request to the address new_note_spa with the user input as a JSON data, if successful the server respond with status code 201 (created).

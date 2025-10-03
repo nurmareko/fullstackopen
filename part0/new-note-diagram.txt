@@ -1,5 +1,0 @@
-What happened when you click the save button on the notes page?
-
-The browser will do an HTTP POST request to the server to the specified URL with the user input, if sucessfull the server respond with status code 302 which mean an URL redirect, now the browser will try to get the URL defined in header's location which is the URL for notes page, this will in turn cause the page to reload.
-
-

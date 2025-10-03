@@ -1,5 +1,13 @@
+import Countries from './components/Countries'
+import CountriesForm from './components/CountriesForm'
+
 const App = () => {
-  return <>Hello countries!</>;
+  return (
+    <>
+      <CountriesForm />
+      <Countries />
+    </>
+  )
 };
 
-export default App;
+export default App

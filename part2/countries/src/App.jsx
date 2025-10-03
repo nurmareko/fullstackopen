@@ -1,11 +1,11 @@
-import Countries from './components/Countries'
-import CountriesForm from './components/CountriesForm'
+import Information from './components/Information'
+import Filter from './components/Filter'
 
 const App = () => {
   return (
     <>
-      <CountriesForm />
-      <Countries />
+      <Filter />
+      <Information />
     </>
   )
 };

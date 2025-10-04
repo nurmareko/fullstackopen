@@ -1,17 +1,27 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import countryService from './services/country'
 import Information from './components/Information'
 import Filter from './components/Filter'
 
 const App = () => {
   const [countries, setCountries] = useState([])
+  const [countryFilter, setCountryFilter] = useState("")
 
+  useEffect(() => {
+    countryService
+      .getAll()
+      .then(countries => setCountries(countries))
+      .catch(error => console.log(error))
+  }, [])
 
-
+  const handleCountryFilter = (event) => {
+    setCountryFilter(event.target.value)
+  }
 
   return (
     <>
-      <Filter />
-      <Information countries={countries} />
+      <Filter value={countryFilter} onChange={handleCountryFilter} />
+      <Information countries={countries} countryFilter={countryFilter} />
     </>
   )
 };

@@ -1,5 +1,12 @@
 const ListOfCountry = ({ countries }) => {
-  return <p>list of country</p>
+  console.log(countries)
+  const names = countries.map(country => country.name.common)
+  console.log(names)
+  return (
+    <>
+      {names.map(name => <p>{name}</p>)}
+    </>
+  )
 }
 
 export default ListOfCountry

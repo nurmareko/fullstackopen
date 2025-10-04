@@ -15,7 +15,7 @@ const Information = ({ countries, countryFilter }) => {
       console.log(coutriesToShow[0])
       return <CountryInformation country={coutriesToShow[0]} />
     } else if (length <= 10) {
-      return <ListOfCountry countries={countries} />
+      return <ListOfCountry countries={coutriesToShow} />
     } else {
       return <p>Too many matches, specify another filter</p>
     }

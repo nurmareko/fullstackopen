@@ -19,7 +19,7 @@ const CountryInformation = ({ country }) => {
   const languages = country.languages
   const flagUrl = country.flags.png
   const temperature = weather !== null ? weather.main.temp : 0
-  const wind = weather !== null ? weather.wind.gust : 0
+  const wind = weather !== null ? weather.wind.speed : 0
   const weatherIconLink = weather !== null ? `https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png` : null
 
   return (

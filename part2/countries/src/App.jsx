@@ -4,6 +4,7 @@ import Information from './components/Information'
 import Filter from './components/Filter'
 
 const App = () => {
+  // console.log(import.meta.env.VITE_SOME_KEY)
   const [countries, setCountries] = useState([])
   const [countryFilter, setCountryFilter] = useState("")
 

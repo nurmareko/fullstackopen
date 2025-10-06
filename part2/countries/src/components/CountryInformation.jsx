@@ -17,6 +17,10 @@ const CountryInformation = ({ country }) => {
         )}
       </ul>
       <img alt="country flag" src={flagUrl} />
+      <h2>Weather in {name}</h2>
+      <p>Temperature -0.0 Celcius</p>
+      <img alt="weather icon" src="" />
+      <p>Wind 0.0 m/s</p>
     </>
   )
 }

@@ -18,10 +18,14 @@ const App = () => {
     setCountryFilter(event.target.value)
   }
 
+  const showPerson = (name) => {
+    setCountryFilter(name)
+  }
+
   return (
     <>
       <Filter value={countryFilter} onChange={handleCountryFilter} />
-      <Information countries={countries} countryFilter={countryFilter} />
+      <Information countries={countries} countryFilter={countryFilter} showPerson={showPerson} />
     </>
   )
 };

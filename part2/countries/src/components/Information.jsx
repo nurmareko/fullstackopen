@@ -1,7 +1,7 @@
 import CountryInformation from './CountryInformation'
 import ListOfCountry from './ListOfCountry'
 
-const Information = ({ countries, countryFilter }) => {
+const Information = ({ countries, countryFilter, showPerson }) => {
   if (countryFilter === "") {
     return <></>
   } else {
@@ -13,7 +13,7 @@ const Information = ({ countries, countryFilter }) => {
     } else if (length == 1) {
       return <CountryInformation country={coutriesToShow[0]} />
     } else if (length <= 10) {
-      return <ListOfCountry countries={coutriesToShow} />
+      return <ListOfCountry countries={coutriesToShow} showPerson={showPerson} />
     } else {
       return <p>Too many matches, specify another filter</p>
     }

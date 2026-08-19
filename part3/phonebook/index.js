@@ -67,20 +67,32 @@ const generateId = () => {
   return String(getRandomInt(MAX))
 }
 
+const alreadyExist = (name) => {
+  return phonebook.find(person => person.name === name)
+}
+
 app.post('/api/persons', (request, response) => {
   const body = request.body
+  const name = body.name
+  const number = body.number
 
   // Validate data
-  if (!(body.name && body.number)) {
+  if (!(name && number)) {
     return response.status(400).json(
-      {error: 'invalid data'}
+      {error: 'name or number is missing'}
+    )
+  }
+
+  if (alreadyExist(name)) {
+    return response.status(400).json(
+      {error: 'name must be unique'}
     )
   }
 
   const person = {
     "id": generateId(),
-    "name": body.name,
-    "number": body.number
+    "name": name,
+    "number": number
   }
   phonebook = phonebook.concat(person)
   response.json(person)

@@ -2,9 +2,6 @@ const express = require('express')
 const morgan = require('morgan')
 const app = express()
 
-app.use(express.json())
-app.use(morgan('tiny'))
-
 let phonebook = [
     {
       "id": "1",
@@ -27,6 +24,10 @@ let phonebook = [
       "number": "39-23-6423122"
     }
 ]
+
+app.use(express.json())
+morgan.token('request-body', (req, res) => JSON.stringify(req.body))
+app.use(morgan(`:method :url :status :res[content-length] - :response-time ms :request-body`))
 
 app.get('/info', (request, response) => {
   const n = phonebook.length
@@ -98,7 +99,6 @@ app.post('/api/persons', (request, response) => {
   }
   phonebook = phonebook.concat(person)
   response.json(person)
-  console.log(person)
 })
 
 const PORT = 3001

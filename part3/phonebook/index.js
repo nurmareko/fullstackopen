@@ -24,16 +24,28 @@ const phonebook = [
     }
 ]
 
-app.get('/api/persons', (request, response) => {
-  response.json(phonebook)
-})
-
 app.get('/info', (request, response) => {
   const n = phonebook.length
   const currentDate = new Date()
   const bodyContent = `<p>Phonebook has info for ${n} people</p><p>${currentDate}</p>`
 
   response.send(bodyContent)
+})
+
+app.get('/api/persons', (request, response) => {
+  response.json(phonebook)
+})
+
+app.get('/api/persons/:id', (request, response) => {
+  const id = request.params.id
+  person = phonebook.find(person => person.id === id)
+
+  if (person) {
+    response.json(person)
+  } else {
+    response.status(404).end()
+  }
+
 })
 
 const PORT = 3001

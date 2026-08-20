@@ -30,6 +30,10 @@ app.use(express.json())
 morgan.token('request-body', (req, res) => JSON.stringify(req.body))
 app.use(morgan(`:method :url :status :res[content-length] - :response-time ms :request-body`))
 
+app.get('/', (request, response) => {
+  response.sendFile(path.join(__dirname, 'public', 'index.html'))
+})
+
 app.get('/info', (request, response) => {
   const n = phonebook.length
   const currentDate = new Date()

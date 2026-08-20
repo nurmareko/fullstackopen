@@ -25,6 +25,7 @@ let phonebook = [
     }
 ]
 
+app.use(express.static('dist'))
 app.use(express.json())
 morgan.token('request-body', (req, res) => JSON.stringify(req.body))
 app.use(morgan(`:method :url :status :res[content-length] - :response-time ms :request-body`))

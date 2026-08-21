@@ -22,14 +22,16 @@ const Person = mongoose.model('Person', phonebookSchema)
 
 // Case: displaying all data
 if (argvCount === 3) {
-  console.log('displaying all data in database')
-  process.exit(0)
+  Person.find({}).then(result => {
+    result.forEach(person => {
+      console.log(person)
+    })
+  mongoose.connection.close()
+  })
 }
 
 // Case: saving data
 if (argvCount === 5) {
-  console.log('saving new data to database')
-
   const person = new Person({
     name: process.argv[3],
     number: process.argv[4]

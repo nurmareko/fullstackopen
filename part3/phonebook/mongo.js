@@ -9,7 +9,7 @@ if (!(argvCount === 3 || argvCount === 5)) {
 }
 
 const password = process.argv[2]
-const url = `mongodb+srv://dnurmareko_db_user:${password}@cluster0.4g04zzv.mongodb.net/noteApp?retryWrites=true&w=majority&appName=Cluster0`
+const url = `mongodb+srv://dnurmareko_db_user:${password}@cluster0.4g04zzv.mongodb.net/phonebookApp?retryWrites=true&w=majority&appName=Cluster0`
 mongoose.set('strictQuery',false)
 mongoose.connect(url, { family: 4 })
 

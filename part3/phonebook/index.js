@@ -80,9 +80,9 @@ const generateId = () => {
   return String(getRandomInt(MAX))
 }
 
-const alreadyExist = (name) => {
-  return phonebook.find(person => person.name === name)
-}
+// const alreadyExist = (name) => {
+//   return phonebook.find(person => person.name === name)
+// }
 
 app.post('/api/persons', (request, response) => {
   const body = request.body
@@ -96,19 +96,20 @@ app.post('/api/persons', (request, response) => {
     )
   }
 
-  if (alreadyExist(name)) {
-    return response.status(400).json(
-      {error: 'name must be unique'}
-    )
-  }
+  // if (alreadyExist(name)) {
+  //   return response.status(400).json(
+  //     {error: 'name must be unique'}
+  //   )
+  // }
 
-  const person = {
-    "id": generateId(),
+  const person = new Person({
     "name": name,
     "number": number
-  }
-  phonebook = phonebook.concat(person)
-  response.json(person)
+  })
+
+  person.save().then(result => {
+    response.json(result)
+  })
 })
 
 const PORT = process.env.PORT || 3001

@@ -79,16 +79,6 @@ app.delete('/api/persons/:id', (request, response) => {
     .catch(error => next(error))
 })
 
-const generateId = () => {
-  const MAX = 1000000
-
-  const getRandomInt = () => {
-    return Math.floor(Math.random() * MAX)
-  }
-
-  return String(getRandomInt(MAX))
-}
-
 // const alreadyExist = (name) => {
 //   return phonebook.find(person => person.name === name)
 // }

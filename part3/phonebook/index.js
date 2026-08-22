@@ -47,12 +47,15 @@ app.get('/', (request, response) => {
   response.sendFile(path.join(__dirname, 'public', 'index.html'))
 })
 
-app.get('/info', (request, response) => {
-  const n = phonebook.length
-  const currentDate = new Date()
-  const bodyContent = `<p>Phonebook has info for ${n} people</p><p>${currentDate}</p>`
-
-  response.send(bodyContent)
+app.get('/info', (request, response, next) => {
+  Person.find({})
+    .then(result => {
+      const n = result.length
+      const currentDate = new Date()
+      const bodyContent = `<p>Phonebook has info for ${n} people</p><p>${currentDate}</p>`
+      return response.send(bodyContent)
+    })
+    .catch(error => next(error))
 })
 
 app.get('/api/persons', (request, response) => {
